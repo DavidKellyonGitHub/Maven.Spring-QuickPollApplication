@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -27,6 +28,7 @@ public class PollController {
         return new ResponseEntity<>(pollRepository.findAll(), HttpStatus.OK);
     }
 
+    @Valid
     @RequestMapping(value = "/polls", method = RequestMethod.POST)
     public ResponseEntity<?> createPoll(@RequestBody Poll poll){
         pollRepository.save(poll);
@@ -45,6 +47,7 @@ public class PollController {
         return new ResponseEntity<> (pollRepository.findOne(pollId), HttpStatus.OK);
     }
 
+    @Valid
     @RequestMapping(value="/polls/{pollId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updatePoll(@RequestBody Poll poll, @PathVariable Long pollId){
         pollRepository.save(poll);
