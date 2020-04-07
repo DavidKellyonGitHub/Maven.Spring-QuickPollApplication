@@ -1,18 +1,27 @@
 package dtos.error;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.validation.Validation;
+import java.util.List;
+import java.util.Map;
+
 public class ErrorDetail {
     String title;
     int status;
     String detail;
     long timeStamp;
     String developerMessage;
+    Map<String, List<ValidationError>> errors;
 
-    public ErrorDetail(String title, int status, String detail, long timeStamp, String developerMessage) {
+    @Autowired
+    public ErrorDetail(String title, int status, String detail, long timeStamp, String developerMessage, Map<String, List<ValidationError>> errors) {
         this.title = title;
         this.status = status;
         this.detail = detail;
         this.timeStamp = timeStamp;
         this.developerMessage = developerMessage;
+        this.errors = errors;
     }
 
     public String getTitle() {
@@ -53,5 +62,13 @@ public class ErrorDetail {
 
     public void setDeveloperMessage(String developerMessage) {
         this.developerMessage = developerMessage;
+    }
+
+    public Map<String, List<ValidationError>> getErrors() {
+        return errors;
+    }
+
+    public void setErrors(Map<String, List<ValidationError>> errors) {
+        this.errors = errors;
     }
 }
